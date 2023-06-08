@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 
 namespace Tic_Tac_Toe_Game
 {
@@ -25,7 +26,16 @@ namespace Tic_Tac_Toe_Game
             var window = (Window)sender;
             window.Visibility = Visibility.Hidden; //прихованя сторінки, яка визвала перехід
             TwoPlayresGameWindow = new TwoPlayerGameWindow(); // оновлення сторінки для гри на двох
+            GC.Collect();
             TwoPlayresGameWindow.Visibility = Visibility.Visible; //показ сторінки для гри на двох
+        }
+        public static void OpenBotGameWindow(object sender, int difficulty)
+        {
+            var window = (Window)sender;
+            window.Visibility = Visibility.Hidden; //прихованя сторінки, яка визвала перехід
+            BotGameWindow = new BotGameWindow(difficulty); //оновлення сторінки для гри з ботом
+            GC.Collect();
+            BotGameWindow.Visibility = Visibility.Visible; //показ сторінки для гри з ботом
         }
 
         public static void OpenBotDifficultyMenuWindow(object sender)
@@ -33,14 +43,6 @@ namespace Tic_Tac_Toe_Game
             var window = (Window)sender;
             window.Visibility = Visibility.Hidden; //прихованя сторінки, яка визвала перехід
             BotDifficultyMenuWindow.Visibility = Visibility.Visible; //показ сторінки для вибору складності 
-        }
-
-        public static void OpenBotGameWindow(object sender, int difficulty)
-        {
-            var window = (Window)sender;
-            window.Visibility = Visibility.Hidden; //прихованя сторінки, яка визвала перехід
-            BotGameWindow = new BotGameWindow(difficulty); //оновлення сторінки для гри з ботом
-            BotGameWindow.Visibility = Visibility.Visible; //показ сторінки для гри з ботом
         }
     }
 }
